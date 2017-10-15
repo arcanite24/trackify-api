@@ -8,13 +8,27 @@ const Spotify = new SpotifyApi({id: CLIENT_ID, secret: CLIENT_SECRET})
 module.exports = function(Usuario) {
 
   // Spotify Logic
-  Usuario.getSpotifyKey = cb => {
-    Spotify.search({type: 'album', query: 'Malina'}, (err, data) => {
+  Usuario.searchAlbum = (query, cb) => {
+    Spotify.search({type: 'album', query}, (err, data) => {
       if (err) return cb(err)
       return cb(null, data)
     })
   }
 
-  Usuario.remoteMethod('getSpotifyKey', {returns: {arg: 'res', type: 'object'}})
+  Usuario.searchSong = (query, cb) => {
+    Spotify.search({type: 'track', query}, (err, data) => {
+      if (err) return cb(err)
+      return cb(null, data)
+    })
+  }
+
+  Usuario.remoteMethod('searchAlbum', {
+    returns: {arg: 'res', type: 'object'},
+    accepts: {arg: 'query', type: 'string'}
+  })
+  Usuario.remoteMethod('searchSong', {
+    returns: {arg: 'res', type: 'object'},
+    accepts: {arg: 'query', type: 'string'}
+  })
 
 };

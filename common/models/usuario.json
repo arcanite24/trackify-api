@@ -28,6 +28,13 @@
       "principalId": "$unauthenticated",
       "permission": "ALLOW",
       "property": "login"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW",
+      "property": "searchAlbum"
     }
   ],
   "methods": {}
